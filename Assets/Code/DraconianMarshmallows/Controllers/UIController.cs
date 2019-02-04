@@ -9,6 +9,7 @@ namespace DraconianMarshmallows.Controllers
     public class UIController : BaseUIController, IUpdateable
     {
         private const string HORIZONTAL = "Horizontal";
+        private const string VERTICLE   = "Vertical";
         private const string JUMP       = "Jump";
         private const float ROLL_TORQUE = 5f;
         private const float JUMP_FORCE  = 500f;
@@ -16,6 +17,7 @@ namespace DraconianMarshmallows.Controllers
         private PlayerController playerController;
 
         private float horizontalAxis;
+        private float verticalAxis;
 
         protected override void Start()
         {
@@ -31,18 +33,16 @@ namespace DraconianMarshmallows.Controllers
         public void OnUpdate()
         {
             horizontalAxis = Input.GetAxis(HORIZONTAL);
+            verticalAxis = Input.GetAxis(VERTICLE);
 
-            if (horizontalAxis < 0)
-            {
-                playerController.roll(ROLL_TORQUE);
-            }
-            else if (horizontalAxis > 0)
-            {
-                playerController.roll(-ROLL_TORQUE);
-            }
+            if (horizontalAxis < 0) playerController.roll(ROLL_TORQUE);
+            else 
+            if (horizontalAxis > 0) playerController.roll(-ROLL_TORQUE);
 
-            if (Input.GetButtonDown(JUMP))
-                playerController.jump(JUMP_FORCE);
+            if (verticalAxis < 0) playerController.Coil();
+            else playerController.UnCoil();
+
+            if (Input.GetButtonDown(JUMP)) playerController.jump(JUMP_FORCE);
         }
     }
 }

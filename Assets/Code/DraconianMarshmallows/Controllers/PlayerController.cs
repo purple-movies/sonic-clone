@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using com.draconianmarshmallows.boilerplate.controllers;
+using System;
 
 namespace DraconianMarshmallows.Controllers
 {
@@ -8,14 +9,14 @@ namespace DraconianMarshmallows.Controllers
     {
         private const float JUMP_DISTANCE = 1f;
         private const float MAX_ANGULAR_VELOCITY = 500f;
-        //[SerializeField] private Rigidbody2D body;
+
         [SerializeField] private Rigidbody2D wheel;
-        //[SerializeField] private Transform wheel;
-        //[SerializeField] private float spinSpeed = 2;
+        [SerializeField] private Renderer head;
 
         private Vector2 jumpForce = new Vector2();
         private Vector3 endPoint = new Vector3();
         private Transform wheelTransform;
+        private bool coiled; 
         
         protected override void Start()
         {
@@ -35,6 +36,8 @@ namespace DraconianMarshmallows.Controllers
         {
             //wheel.Rotate(0, 0, - torque * spinSpeed);
 
+            if ( ! coiled) return;
+
             if (Mathf.Abs(wheel.angularVelocity) > MAX_ANGULAR_VELOCITY)
             {
                 wheel.angularVelocity = wheel.angularVelocity > 0 ?
@@ -44,6 +47,20 @@ namespace DraconianMarshmallows.Controllers
             {
                 wheel.AddTorque(torque);
             }
+        }
+
+        public void Coil()
+        {
+            Debug.Log("Coiled...");
+            coiled = true;
+            head.enabled = false;
+        }
+
+        public void UnCoil()
+        {
+            Debug.Log("Un-coiled...");
+            coiled = false;
+            head.enabled = true;
         }
 
         public void jump(float force)
@@ -56,13 +73,13 @@ namespace DraconianMarshmallows.Controllers
             wheel.AddForce(jumpForce);
         }
 
-        private void OnDrawGizmos()
-        {
-            if ( ! Application.isPlaying) return; // wheelTransform is only set when start is called while playing. 
+        //private void OnDrawGizmos()
+        //{
+        //    if ( ! Application.isPlaying) return; // wheelTransform is only set when start is called while playing. 
 
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(wheelTransform.position, endPoint);
-        }
+        //    Gizmos.color = Color.blue;
+        //    Gizmos.DrawLine(wheelTransform.position, endPoint);
+        //}
 
         protected override void OnCollisionEnter2D(Collision2D collision)
         {

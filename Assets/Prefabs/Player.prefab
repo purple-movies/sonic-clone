@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheel: {fileID: 929884526210148847}
-  spinSpeed: 0.05
+  head: {fileID: 7797497541665479604}
 --- !u!1 &3078580106559268860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1314,15 +1314,21 @@ PrefabInstance:
     - {fileID: 58459700679418506, guid: 0b5028793da9212468feeac294adf7a9, type: 3}
     - {fileID: 50033087942093910, guid: 0b5028793da9212468feeac294adf7a9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0b5028793da9212468feeac294adf7a9, type: 3}
---- !u!1 &7980930544028108528 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1149951388595090, guid: 0b5028793da9212468feeac294adf7a9,
+--- !u!212 &7797497541665479604 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 212695473145327318, guid: 0b5028793da9212468feeac294adf7a9,
     type: 3}
   m_PrefabInstance: {fileID: 7982036416032601442}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7986487432654073322 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4600172297148552, guid: 0b5028793da9212468feeac294adf7a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7982036416032601442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7980930544028108528 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1149951388595090, guid: 0b5028793da9212468feeac294adf7a9,
     type: 3}
   m_PrefabInstance: {fileID: 7982036416032601442}
   m_PrefabAsset: {fileID: 0}

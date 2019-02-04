@@ -15,7 +15,7 @@ public class OffsetTransformLink : MonoBehaviour
         // This currently assumes we're offsetting on the Y axis. 
         yOffset = transform.position.y - parentTransform.position.y;
 
-        Debug.Log("offset : " + yOffset);
+        //Debug.Log("offset : " + yOffset);
     }
 
     // TODO:: plug this into our update manager. 
