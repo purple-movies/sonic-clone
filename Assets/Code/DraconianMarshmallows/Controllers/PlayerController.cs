@@ -61,6 +61,7 @@ namespace DraconianMarshmallows.Controllers
             Debug.Log("Un-coiled...");
             coiled = false;
             head.enabled = true;
+            wheel.angularVelocity = 0;
         }
 
         public void jump(float force)
