@@ -12,15 +12,18 @@ namespace DraconianMarshmallows.Controllers
 
         [SerializeField] private Rigidbody2D wheel;
         [SerializeField] private Renderer head;
+        [SerializeField] private GameObject sheild;
 
         private Vector2 jumpForce = new Vector2();
         private Vector3 endPoint = new Vector3();
+        private Transform headTransform;
         private Transform wheelTransform;
         private bool coiled; 
         
         protected override void Start()
         {
             base.Start();
+            headTransform = head.transform;
             wheelTransform = wheel.transform;
         }
 
@@ -30,6 +33,14 @@ namespace DraconianMarshmallows.Controllers
             {
                 y = transform.position.y - JUMP_DISTANCE
             };
+
+            Debug.Log("sheild position : " + sheild.transform.position);
+
+            sheild.transform.position = (headTransform.position + wheel.transform.position) / 2;
+
+            // NOTE:: THE PLAYER OBJECT IS ONLY A CONTAINER .....
+            //sheild.transform.position = transform.position;
+            //Debug.Log(sheild.transform.position + " = " + transform.position);
         }
 
         public void roll(float torque)
@@ -54,6 +65,7 @@ namespace DraconianMarshmallows.Controllers
             Debug.Log("Coiled...");
             coiled = true;
             head.enabled = false;
+            sheild.SetActive(false);
         }
 
         public void UnCoil()
@@ -61,6 +73,7 @@ namespace DraconianMarshmallows.Controllers
             Debug.Log("Un-coiled...");
             coiled = false;
             head.enabled = true;
+            sheild.SetActive(true);
             wheel.angularVelocity = 0;
         }
 
