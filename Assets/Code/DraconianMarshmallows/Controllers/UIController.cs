@@ -32,6 +32,8 @@ namespace DraconianMarshmallows.Controllers
 
         public void OnUpdate()
         {
+            if (playerController == null) return;
+
             horizontalAxis = Input.GetAxis(HORIZONTAL);
             verticalAxis = Input.GetAxis(VERTICLE);
 
