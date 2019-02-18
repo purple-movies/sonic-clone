@@ -27,6 +27,7 @@ namespace DraconianMarshmallows.Controllers
             wheelTransform = wheel.transform;
         }
 
+        // TODO:: implement update-manager. 
         private void Update()
         {
             endPoint = new Vector3(wheelTransform.position.x, wheelTransform.position.y, wheelTransform.position.z)
@@ -34,13 +35,19 @@ namespace DraconianMarshmallows.Controllers
                 y = transform.position.y - JUMP_DISTANCE
             };
 
-            Debug.Log("sheild position : " + sheild.transform.position);
+            //Debug.Log("sheild position : " + sheild.transform.position);
 
             sheild.transform.position = (headTransform.position + wheel.transform.position) / 2;
 
             // NOTE:: THE PLAYER OBJECT IS ONLY A CONTAINER .....
             //sheild.transform.position = transform.position;
             //Debug.Log(sheild.transform.position + " = " + transform.position);
+        }
+
+        public override void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other);
+            Debug.Log("on trigger enter 2d fired on parent delegate.");
         }
 
         public void roll(float torque)
