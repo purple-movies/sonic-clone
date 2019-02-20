@@ -10,6 +10,8 @@ namespace DraconianMarshmallows.Controllers
         private const float JUMP_DISTANCE = 1f;
         private const float MAX_ANGULAR_VELOCITY = 500f;
 
+        public bool Rolling { get { return wheel.angularVelocity > 0; } }
+
         [SerializeField] private Rigidbody2D wheel;
         [SerializeField] private Renderer head;
         [SerializeField] private GameObject sheild;

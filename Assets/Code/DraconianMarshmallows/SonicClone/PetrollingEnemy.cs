@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DraconianMarshmallows.Controllers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO:: use a super-class to standarize ?
 [RequireComponent(typeof(Collider2D))]
 public class PetrollingEnemy : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class PetrollingEnemy : MonoBehaviour
     [SerializeField] Transform endPatrolPoint;
 
     [SerializeField] GameObject embeddedDeathParticles;
+
+    PlayerController playerController;
 
     Vector3 startPosition;
     Vector3 nextTargetPosition; 
@@ -32,12 +36,10 @@ public class PetrollingEnemy : MonoBehaviour
         if (transform.position.Equals(startPatrolPoint.position))
         {
             setDestination(endPatrolPoint.position);
-            //nextTargetPosition = endPatrolPoint.position;
         }
         else if (transform.position.Equals(endPatrolPoint.position))
         {
             setDestination(startPatrolPoint.position);
-            //nextTargetPosition = startPatrolPoint.position;
         }
     }
 
@@ -45,7 +47,7 @@ public class PetrollingEnemy : MonoBehaviour
     {
         Debug.Log("trigger : " + collision.CompareTag("Armor"));
 
-        if (collision.CompareTag("Armor"))
+        if (getPlayerController().Rolling && collision.CompareTag("Armor"))
             die();
     }
 
@@ -61,6 +63,14 @@ public class PetrollingEnemy : MonoBehaviour
         tmpTime = 0;
         startPosition = transform.position;
         //timeToReachTarget = time;
-        nextTargetPosition = destination; 
+        nextTargetPosition = destination;
+    }
+
+    private PlayerController getPlayerController()
+    {
+        if (playerController) return playerController;
+
+        playerController = PlayerController.Instance as PlayerController;
+        return playerController;
     }
 }
